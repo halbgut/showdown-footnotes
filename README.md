@@ -1,4 +1,4 @@
-# Showndown Footnotes – 0.1.0
+# Showndown Footnotes – 1.0.0
 
 Simply footnotes for Showdown.
 

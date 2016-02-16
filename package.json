@@ -3,7 +3,7 @@
   "description": "A simple footnotes implementation for Showdown.",
   "license": "MIT",
   "repository": "https://github.com/Kriegslustig/showdown-footnotes.git",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
     "showdown": "^1.3.0"
