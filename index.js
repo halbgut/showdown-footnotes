@@ -1,13 +1,17 @@
 module.exports = converter => [
   {
     type: 'lang',
-    regex: /\[\^([\d\w]+)\]/,
-    replace: match => `<a href="#footnote-${match[1]}"><sup>[${match[1]}]</sup></a>`
+    filter: text => text.replace(
+      /\[\^([\d\w]+)\]/,
+      (str, p1) => `<a href="#footnote-${p1}"><sup>[${p1}]</sup></a>`
+    )
   },
   {
     type: 'lang',
-    regex: /\^[\^([\d\w]+)\]: (.+)$/,
-    filter: match => `<small class="footnote" id="footnote-${match[1]}"><sup>[${match[1]}]</sup>: ${match[2]}</small>`
+    filter: text => text.replace(
+      /^\[\^([\d\w]+)\]: (.+)$/m,
+      (str, p1, p2) => `<small class="footnote" id="footnote-${p1}"><sup>[${p1}]</sup>: ${p2}</small>`
+    ),
   }
 ]
 

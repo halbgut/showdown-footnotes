@@ -25,9 +25,8 @@ Some word or something that needs explaining[^1].
 That would look compile to this.
 
 ```html
-Some word or something that needs explaining<a href="#footnote-1"><sup>[1]</sup></a>.
+<p>Some word or something that needs explaining<a href="#footnote-1"><sup>[1]</sup></a>.</p>
 
-<small class="footnote" id="footnote-1"><sup>[1]</sup>: The explanation.</small>
-
+<p><small class="footnote" id="footnote-1"><sup>[1]</sup>: The explanation.</small></p>
 ```
 
