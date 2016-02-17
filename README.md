@@ -2,7 +2,7 @@
 
 ![CI build status](https://travis-ci.org/Kriegslustig/showdown-footnotes.svg?branch=master)
 
-Simply footnotes for Showdown.
+Simply footnotes for [Showdown](https://github.com/showdownjs/showdown).
 
 ## Install
 
