@@ -1,4 +1,4 @@
-# Showndown Footnotes – 1.0.0
+# Showndown Footnotes – 1.1.0
 
 ![CI build status](https://travis-ci.org/Kriegslustig/showdown-footnotes.svg?branch=master)
 
