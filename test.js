@@ -26,10 +26,21 @@ test('link', t => {
   )
 })
 
-test('note iwth inner format', t => {
+test('note with inner format', t => {
   const testString = [
     '\n[^1test] The _explanation_.\n',
     '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a> The <em>explanation</em>.</small></p>'
+  ]
+  t.same(
+    converter.makeHtml(testString[0]),
+    testString[1]
+  )
+})
+
+test('note with multi-line notes', t => {
+  const testString = [
+    '\n[^1test] The _explanation_.\n\n\n  some more\n  _lines_\n\n',
+    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a> The <em>explanation</em>.\nsome more\n<em>lines</em></small></p>'
   ]
   t.same(
     converter.makeHtml(testString[0]),
