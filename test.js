@@ -6,8 +6,8 @@ const converter = new showdown.Converter({ extensions: [footnotes] })
 
 test('note', t => {
   t.same(
-    converter.makeHtml('\n\n[^1test] The explanation.\n'),
-    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a> The explanation.</small></p>'
+    converter.makeHtml('\n\n[^1test]: The explanation.\n'),
+    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>: The explanation.</small></p>'
   )
 })
 
@@ -20,29 +20,29 @@ test('link', t => {
 
 test('note with inner format', t => {
   t.same(
-    converter.makeHtml('\n[^1test] The _explanation_.\n'),
-    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a> The <em>explanation</em>.</small></p>'
+    converter.makeHtml('\n[^1test]: The _explanation_.\n'),
+    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>: The <em>explanation</em>.</small></p>'
   )
 })
 
 test('note with multi-line notes', t => {
   t.same(
-    converter.makeHtml('\n[^1test]\n  some more\n  _lines_\n\n'),
-    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a><p>some more\n<em>lines</em></p></small></p>'
+    converter.makeHtml('\n[^1test]:\n  some more\n  _lines_\n\n'),
+    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more\n<em>lines</em></p></small></p>'
   )
 })
 
 test('note with multi-line notes and multiple paragraphs', t => {
   t.same(
-    converter.makeHtml('\n[^1test]\n\n  some more\n  _lines_\n\nyolo\n'),
-    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a><p>some more\n<em>lines</em></p></small></p>\n\n<p>yolo</p>'
+    converter.makeHtml('\n[^1test]:\n\n  some more\n  _lines_\n\nyolo\n'),
+    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more\n<em>lines</em></p></small></p>\n\n<p>yolo</p>'
   )
 })
 
 test('multi-line footnote with empty line in between', t => {
   t.same(
-    converter.makeHtml('\n[^1test]\n\n  some more\n\n  _lines_\n\nyolo\n'),
-    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a><p>some more\n<em>lines</em></p></small></p>\n\n<p>yolo</p>'
+    converter.makeHtml('\n[^1test]:\n\n  some more\n\n  _lines_\n\nyolo\n'),
+    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more\n<em>lines</em></p></small></p>\n\n<p>yolo</p>'
   )
 })
 

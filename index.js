@@ -6,7 +6,7 @@ module.exports = () => [
   {
     type: 'lang',
     filter: text => text.replace(
-      /^\[\^([\d\w]+)\]( (.+)|(\n+(\s{2,}|\t).+)+)$/mg,
+      /^\[\^([\d\w]+)\]:( (.+)|(\n+(\s{2,}|\t).+)+)$/mg,
       (str, p1, p2, p3, p4) => {
         let content
         if(p4) {
@@ -14,7 +14,7 @@ module.exports = () => [
         } else {
           content = ' ' + p3
         }
-        return `<small class="footnote" id="footnote-${p1}"><a href="#footnote-${p1}"><sup>[${p1}]</sup></a>${content}</small>`
+        return `<small class="footnote" id="footnote-${p1}"><a href="#footnote-${p1}"><sup>[${p1}]</sup></a>:${content}</small>`
       }
     ),
   },
