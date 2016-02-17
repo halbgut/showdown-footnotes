@@ -30,3 +30,12 @@ That would look compile to this.
 <p><small class="footnote" id="footnote-1"><a href="#footnote-1"><sup>[1]</sup></a> The explanation.</small></p>
 ```
 
+Shownotes-footnotes also supports multi-line footnotes. You'll just need to indent the lines following the superscript.
+
+```md
+[^5]
+  This is a paragraph.
+
+  _That_ is another paragraph which is still within the same footnote.
+```
+
