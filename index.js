@@ -7,14 +7,14 @@ module.exports = () => [
     type: 'lang',
     filter: text => text.replace(
       /^\[\^([\d\w]+)\]:( (.+)|(\n+(\s{2,}|\t).+)+)$/mg,
-      (str, p1, p2, p3, p4) => {
+      (str, name, rawContent, singleLineContent, multilineContent) => {
         let content
-        if (p4) {
-          content = converter.makeHtml(p2.replace(/^\s+/gm, ''))
+        if (multilineContent) {
+          content = converter.makeHtml(rawContent.replace(/^\s+/gm, ''))
         } else {
-          content = ' ' + p3
+          content = ' ' + singleLineContent
         }
-        return `<small class="footnote" id="footnote-${p1}"><a href="#footnote-${p1}"><sup>[${p1}]</sup></a>:${content}</small>`
+        return `<small class="footnote" id="footnote-${name}"><a href="#footnote-${name}"><sup>[${name}]</sup></a>:${content}</small>`
       }
     )
   },
@@ -22,7 +22,7 @@ module.exports = () => [
     type: 'lang',
     filter: text => text.replace(
       /\[\^([\d\w]+)\]/m,
-      (str, p1) => `<a href="#footnote-${p1}"><sup>[${p1}]</sup></a>`
+      (str, name) => `<a href="#footnote-${name}"><sup>[${name}]</sup></a>`
     )
   }
 ]
