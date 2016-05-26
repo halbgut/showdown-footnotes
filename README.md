@@ -1,4 +1,4 @@
-# Showndown Footnotes – 1.1.0
+# Showndown Footnotes – 2.0.0
 
 ![CI build status](https://travis-ci.org/Kriegslustig/showdown-footnotes.svg?branch=master)
 
@@ -32,12 +32,22 @@ That would look compile to this.
 <p><small class="footnote" id="footnote-1"><a href="#footnote-1"><sup>[1]</sup></a>: The explanation.</small></p>
 ```
 
-Shownotes-footnotes also supports multi-line footnotes. You'll just need to indent the lines following the superscript.
+Shownotes-footnotes also supports multiline footnotes. You'll just need to indent the lines following the superscript.
 
 ```md
 [^5]:
   This is a paragraph.
 
   _That_ is another paragraph which is still within the same footnote.
+```
+
+Multiline footnotes are wrapped in a `<div>` instead of a `<small>`.
+
+```html
+<div class="footnote" id="footnote-5">
+  <a href="#footnote-5"><sup>[5]</sup></a>:
+  <p>This is a paragraph.</p>
+  <p><em>That</em> is another paragraph which is still within the same footnote.</p>
+</div>
 ```
 
