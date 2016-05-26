@@ -68,3 +68,22 @@ test('multi-line footnotes with four spaces', t => {
   t.same(converter.makeHtml(input), output)
 })
 
+test('multi-line footnotes with code snippet', t => {
+  const tests = [
+[`
+[^code]:
+        Coooode`,
+`<p><small class="footnote" id="footnote-code"><a href="#footnote-code"><sup>[code]</sup></a>:<pre><code>Coooode
+</code></pre></small></p>`],
+[`[^code]:
+    yoo
+
+        Coooode`,
+`<p><small class="footnote" id="footnote-code"><a href="#footnote-code"><sup>[code]</sup></a>:<p>yoo</p></p>
+
+<p><pre><code>Coooode
+</code></pre></small></p>`]
+  ]
+  tests.forEach(([i, o]) => t.same(converter.makeHtml(i), o))
+})
+
