@@ -6,11 +6,11 @@ module.exports = () => [
   {
     type: 'lang',
     filter: text => text.replace(
-      /^\[\^([\d\w]+)\]:( (.+)|(\n+(\s{2,}|\t).+)+)$/mg,
-      (str, name, rawContent, singleLineContent, multilineContent) => {
+      /^\[\^([\d\w]+)\]:( (.+)|\s*(\n+(\s{2,4}|\t).+)+)$/mg,
+      (str, name, rawContent, singleLineContent, multilineContent, padding) => {
         let content
         if (multilineContent) {
-          content = converter.makeHtml(rawContent.replace(/^\s+/gm, ''))
+          content = converter.makeHtml(removeAll(padding, rawContent))
         } else {
           content = ' ' + singleLineContent
         }
@@ -26,4 +26,15 @@ module.exports = () => [
     )
   }
 ]
+
+function removeAll (substr, str) {
+  const pos = str.indexOf(substr)
+  if (pos === -1) return str
+  else {
+    return removeAll(
+      substr,
+      str.substring(0, pos) + str.substring(pos + substr.length)
+    )
+  }
+}
 
