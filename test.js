@@ -40,18 +40,31 @@ test('note with multi-line notes and multiple paragraphs', t => {
 })
 
 test('multi-line footnote with empty line in between', t => {
-  t.same(
-    converter.makeHtml('\n[^1test]:\n\n  some more\n\n  _lines_\n\nyolo\n'),
-    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more\n<em>lines</em></p></small></p>\n\n<p>yolo</p>'
-  )
+  const input =
+`
+[^1test]:
+
+  some more
+
+  _lines_
+
+yolo
+`
+  const output =
+`<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more</p></p>
+
+<p><p><em>lines</em></p></small></p>
+
+<p>yolo</p>`
+  t.same(converter.makeHtml(input), output)
 })
 
 test('multi-line footnotes with four spaces', t => {
   const input =
-`[^1] 
+`[^1]: 
     This is a footnote that
     is split in two lines.`
-  const output = '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1]</sup></a>:<p>This is a footnote that is split in two lines.</p>'
+  const output = '<p><small class="footnote" id="footnote-1"><a href="#footnote-1"><sup>[1]</sup></a>:<p>This is a footnote that\nis split in two lines.</p></small></p>'
   t.same(converter.makeHtml(input), output)
 })
 
