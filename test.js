@@ -103,13 +103,23 @@ yolo
   ]
 , [ /************************ START TEST ***************************/
 'Single line comments in multiple lines',
-`[^singleline]: single
+`
+irrelevant
+
+[^singleline]: single
 line
 comment
+
+    irrelevant
 `,
-`<p><small class="footnote" id="footnote-singleline"><a href="#footnote-singleline"><sup>[singleline]</sup></a>: single
+`<p>irrelevant</p>
+
+<p><small class="footnote" id="footnote-singleline"><a href="#footnote-singleline"><sup>[singleline]</sup></a>: single
 line
-comment</small></p>`
+comment</small></p>
+
+<pre><code>irrelevant
+</code></pre>`
   ]
 ]
   .forEach(([ comment, input, output ]) => {
