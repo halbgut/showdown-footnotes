@@ -16,5 +16,6 @@
   "scripts": {
     "test": "ava",
     "watch-test": "watch 'npm run test'"
-  }
+  },
+  "author": "Kriegslustig <npm@ls7.ch>"
 }
