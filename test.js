@@ -101,6 +101,16 @@ yolo
 <pre><code>Coooode
 </code></pre></div>`
   ]
+, [ /************************ START TEST ***************************/
+'Single line comments in multiple lines',
+`[^singleline]: single
+line
+comment
+`,
+`<p><small class="footnote" id="footnote-singleline"><a href="#footnote-singleline"><sup>[singleline]</sup></a>: single
+line
+comment</small></p>`
+  ]
 ]
   .forEach(([ comment, input, output ]) => {
     test(comment, t => {
