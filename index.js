@@ -6,8 +6,8 @@ module.exports = () => [
   {
     type: 'lang',
     filter: text => text.replace(
-      /^\[\^([\d\w]+)\]:( (.+)|\s*(\n+(\s{2,4}|\t).+)+)$/mg,
-      (str, name, rawContent, singleLineContent, multilineContent, padding) => {
+      /^\[\^([\d\w]+)\]:( ((.+\n)*.+)|\s*(\n+(\s{2,4}|\t).+)+)$/mg,
+      (str, name, rawContent, singleLineContent, _, multilineContent, padding) => {
         if (multilineContent) {
           const content = converter.makeHtml(rawContent.replace(new RegExp(`^${padding}`, 'gm'), ''))
           return `<div class="footnote" id="footnote-${name}"><a href="#footnote-${name}"><sup>[${name}]</sup></a>:${content}</div>`
