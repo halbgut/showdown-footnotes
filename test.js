@@ -4,43 +4,59 @@ import footnotes from './index'
 
 const converter = new showdown.Converter({ extensions: [footnotes] })
 
-test('note', t => {
-  t.same(
-    converter.makeHtml('\n\n[^1test]: The explanation.\n'),
-    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>: The explanation.</small></p>'
-  )
-})
+; [ [
+'Simple, single line footnote',
+`
 
-test('link', t => {
-  t.same(
-    converter.makeHtml('Some word or something that needs explaining[^test].'),
-    '<p>Some word or something that needs explaining<a href="#footnote-test"><sup>[test]</sup></a>.</p>'
-  )
-})
+[^1test]: The explanation.
+`,
+'<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>: The explanation.</small></p>'
+  ]
 
-test('note with inner format', t => {
-  t.same(
-    converter.makeHtml('\n[^1test]: The _explanation_.\n'),
-    '<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>: The <em>explanation</em>.</small></p>'
-  )
-})
+, [
+'Reference to footnote',
+'Some word or something that needs explaining[^test].',
+'<p>Some word or something that needs explaining<a href="#footnote-test"><sup>[test]</sup></a>.</p>'
+  ]
 
-test('note with multi-line notes', t => {
-  t.same(
-    converter.makeHtml('\n[^1test]:\n  some more\n  _lines_\n\n'),
-    '<div class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more\n<em>lines</em></p></div>'
-  )
-})
+, [
+'note with inner format',
+`
+[^1test]: The _explanation_.
+`,
+'<p><small class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>: The <em>explanation</em>.</small></p>'
+  ]
 
-test('note with multi-line notes and multiple paragraphs', t => {
-  t.same(
-    converter.makeHtml('\n[^1test]:\n\n  some more\n  _lines_\n\nyolo\n'),
-    '<div class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more\n<em>lines</em></p></div>\n\n<p>yolo</p>'
-  )
-})
+, [
+'note with multi-line notes',
+`
+[^1test]:
+  some more
+  _lines_
 
-test('multi-line footnote with empty line in between', t => {
-  const input =
+`,
+`<div class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more
+<em>lines</em></p></div>`
+  ]
+
+, [
+'note with multi-line notes and multiple paragraphs',
+`
+[^1test]:
+
+  some more
+  _lines_
+
+yolo
+`,
+`<div class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more
+<em>lines</em></p></div>
+
+<p>yolo</p>`
+  ]
+
+, [
+'multi-line footnote with empty line in between',
 `
 [^1test]:
 
@@ -49,41 +65,46 @@ test('multi-line footnote with empty line in between', t => {
   _lines_
 
 yolo
-`
-  const output =
+`,
 `<div class="footnote" id="footnote-1test"><a href="#footnote-1test"><sup>[1test]</sup></a>:<p>some more</p>
 
 <p><em>lines</em></p></div>
 
 <p>yolo</p>`
-  t.same(converter.makeHtml(input), output)
-})
+  ]
 
-test('multi-line footnotes with four spaces', t => {
-  const input =
+, [
+'multi-line footnotes with four spaces',
 `[^1]: 
     This is a footnote that
-    is split in two lines.`
-  const output = '<div class="footnote" id="footnote-1"><a href="#footnote-1"><sup>[1]</sup></a>:<p>This is a footnote that\nis split in two lines.</p></div>'
-  t.same(converter.makeHtml(input), output)
-})
+    is split in two lines.`,
+'<div class="footnote" id="footnote-1"><a href="#footnote-1"><sup>[1]</sup></a>:<p>This is a footnote that\nis split in two lines.</p></div>'
+  ]
 
-test('multi-line footnotes with code snippet', t => {
-  const tests = [
-[`
+, [
+'multi-line footnotes with code snippet',
+`
 [^code]:
         Coooode`,
 `<div class="footnote" id="footnote-code"><a href="#footnote-code"><sup>[code]</sup></a>:<pre><code>Coooode
-</code></pre></div>`],
-[`[^code]:
+</code></pre></div>`
+  ]
+
+, [
+'multi-line footnotes with embedded code snippet',
+`[^code]:
     yoo
 
         Coooode`,
 `<div class="footnote" id="footnote-code"><a href="#footnote-code"><sup>[code]</sup></a>:<p>yoo</p>
 
 <pre><code>Coooode
-</code></pre></div>`]
+</code></pre></div>`
   ]
-  tests.forEach(([i, o]) => t.same(converter.makeHtml(i), o))
-})
+]
+  .forEach(([ comment, input, output ]) => {
+    test(comment, t => {
+      t.same(converter.makeHtml(input), output)
+    })
+  })
 
