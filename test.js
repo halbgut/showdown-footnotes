@@ -121,6 +121,15 @@ comment</small></p>
 <pre><code>irrelevant
 </code></pre>`
   ]
+, [ /************************ START TEST ***************************/
+'Single line comments in multiple lines',
+`
+[^singleline]:
+line
+comment`,
+`<p><small class="footnote" id="footnote-singleline"><a href="#footnote-singleline"><sup>[singleline]</sup></a>: line
+comment</small></p>`
+  ]
 ]
   .forEach(([ comment, input, output ]) => {
     test(comment, t => {
