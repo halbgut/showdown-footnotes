@@ -1,4 +1,4 @@
-# Showndown Footnotes – 2.0.0
+# Showdown Footnotes – 2.1.0
 
 ![CI build status](https://travis-ci.org/Kriegslustig/showdown-footnotes.svg?branch=master)
 
@@ -31,6 +31,17 @@ That would look compile to this.
 
 <p><small class="footnote" id="footnote-1"><a href="#footnote-1"><sup>[1]</sup></a>: The explanation.</small></p>
 ```
+
+### Single Line Comments
+
+Single line footnotes can be written over multiple lines like this:
+
+```md
+[^1]: A single line
+footnote
+```
+
+### Multi Line Footnotes
 
 Shownotes-footnotes also supports multiline footnotes. You'll just need to indent the lines following the superscript.
 
