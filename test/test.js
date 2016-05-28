@@ -1,6 +1,6 @@
 import test from 'ava'
 import showdown from 'showdown'
-import footnotes from './index'
+import footnotes from '../dist'
 
 const converter = new showdown.Converter({ extensions: [footnotes] })
 
