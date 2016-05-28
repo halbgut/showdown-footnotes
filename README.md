@@ -1,4 +1,4 @@
-# Showdown Footnotes – 2.1.1
+# Showdown Footnotes – 2.1.2
 
 ![CI build status](https://travis-ci.org/Kriegslustig/showdown-footnotes.svg?branch=master)
 
