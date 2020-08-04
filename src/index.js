@@ -24,7 +24,7 @@ module.exports = () => [
   {
     type: 'lang',
     filter: text => text.replace(
-      /\[\^([\d\w]+)\]/m,
+      /\[\^([\d\w]+)\]/mg,
       (str, name) => `<a href="#footnote-${name}"><sup>[${name}]</sup></a>`
     )
   }
